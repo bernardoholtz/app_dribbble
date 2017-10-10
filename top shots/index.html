@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="shotsApp">
+	<head>
+		<title>Top Shots</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.5.7/angular.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
+		<script type="text/javascript" src="js/ng-infinite-scroll.min.js"></script>
+		<script type="text/javascript" src="js/shot.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+		<div class="container-fluid" id="shotsApp" ng-controller="CtrlLista">
+		   <div class="row header">
+				<div class="col-md-12">
+					<h1>Top Shots</h1>
+				</div>
+		   </div>
+		  <div class="row list" infinite-scroll='carregarMais()' infinite-scroll-distance='1'>
+				<div ng-repeat="shot in shots">
+					<div class="col-sm-3">
+						<div class="img">
+							<a href="#{{ shot.id }}" ng-model="myApp" data-toggle="collapse">
+								<img ng-src="{{ shot.images.normal }}" alt="{{ shot.title }}" class="img-responsive" />
+								<div class="title-panel"></div>
+									<div class="title">
+										<h2>{{ shot.title }}</h2> 
+										<div class="icon">
+											<i class="glyphicon glyphicon-eye-open"></i> <span>{{ shot.views_count }}</span>
+										</div>
+									</div> 
+							</a>
+						</div>
+							<div class="details collapse" id="{{ shot.id }}">
+								<img ng-src="{{ shot.user.avatar_url}}" alt="{{ shot.user.name }}" class="img-responsive img-circle">
+								<h3><a href="https://dribbble.com/{{ shot.user.username }}" target="_blank">{{ shot.user.name }}</a></h3>
+								<p ng-bind-html="shot.description"></p>
+							</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+   
+
+</html>
